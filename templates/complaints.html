@@ -8,7 +8,28 @@
         <title>Website for WesComplains</title>
     </head>
     <body>
-        <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid text-danger">
+              <a class="navbar-brand" href="WesSuggest_Wordmark.png"></a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="suggest-here.html">Make a Suggestion</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active text-danger" href="complaints.html">Vote on Suggestions</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        <div class="container my-5">
             <header class="justify-content-center">
                 <h1 class="">Someone complained:</h1>
                 <h2>{{complaint}}</h2>
