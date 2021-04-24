@@ -25,17 +25,20 @@ def complaints():
     seenComplaints = seenComplaints.split()
     database = DatabaseStorage()
     allComplaints = database.query();
-    
+    print(allComplaints)
+    complaint = "No more complaints!"
+    upvotes = 0
     for x in allComplaints:
-        print(x)
+        complaint = allComplaints[x][0]
+        upvotes = allComplaints[x][1]
+
     
-    return render_template('complaints.html', complaintid=49, complaint="People in musichouse can't flush the toilet for shit.", upvotes=29)
+    return render_template('complaints.html', complaintid=49, complaint=complaint, upvotes=upvotes)
 
 @app.route("/agree/<complaint>")
 def agree(complaint):
     print(complaint + "agreed with")
-    return render_template('complaints.html', complaintid=49, complaint="People in musichouse can't flush the toilet for shit.", upvotes=29)
-
+    return redirect(url_for('complaints'))
 
 if __name__ == '__main__':
     app.run(debug=True)
