@@ -17,22 +17,24 @@ class DatabaseStorage():
                 last text,
                 email text,
                 complaint text,
-                upvotes integer )""")
+                upvotes integer,
+                typeof)""")
 
         conn.commit() 
         conn.close() 
 
     #access the database, adds info to table, saves it
-    def submit(self, first_name, last_name, email, complaint): 
+    def submit(self, first_name, last_name, email, complaint, typeof): 
         #connect to the database 
         conn = sqlite3.connect("WesSuggest_library_info.db")
         c = conn.cursor()
-        c.execute("INSERT INTO complaints VALUES (:id, :first, :last, :email, :complaint, :upvotes)", 
+        c.execute("INSERT INTO complaints VALUES (:id, :first, :last, :email, :complaint, :typeof, :upvotes)", 
             {'id':hash(complaint),
              'first':first_name, 
              'last':last_name,
              'email':email,
              'complaint':complaint,
+             'type':typeof,
              'upvotes':0
             }    
         )
