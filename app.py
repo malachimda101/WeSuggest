@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, make_response
 from databases import DatabaseStorage
 app = Flask(__name__)
 
@@ -26,18 +26,25 @@ def complaints():
     database = DatabaseStorage()
     allComplaints = database.query();
     print(allComplaints)
+    
+    complaintId = 0
     complaint = "No more complaints!"
     upvotes = 0
+
     for x in allComplaints:
-        complaint = allComplaints[x][0]
-        upvotes = allComplaints[x][1]
+        if(request.cookies.get(str(x)) != 'set'):
+            complaintId = x
+            complaint = allComplaints[x][0]
+            upvotes = allComplaints[x][1]
+            break
 
-    
-    return render_template('complaints.html', complaintid=49, complaint=complaint, upvotes=upvotes)
+    resp = make_response(render_template('complaints.html', complaintid=complaintId, complaint=complaint, upvotes=upvotes))
+    resp.set_cookie(str(complaintId), 'set')
+    return resp
 
-@app.route("/agree/<complaint>")
-def agree(complaint):
-    print(complaint + "agreed with")
+@app.route("/agree/<complaintid>")
+def agree(complaintid):
+    print(complaintid + "agreed with")
     return redirect(url_for('complaints'))
 
 if __name__ == '__main__':
