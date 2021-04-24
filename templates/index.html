@@ -14,7 +14,7 @@
                 <h2>A place for students to vent and talk about their problems at Wes, completely anonymous or not. Up to you</h2>
             </header>
         </div>
-        <form action="">
+        <form action="{{url_for()}}">
             <div class="my-3 container">
                 <label for="first-name-input" class="form-label">First Name</label>
                 <input type="name" class="form-control">
@@ -29,7 +29,7 @@
             </div>
             <div class="my-3 container">
                 <label for="complaint-input" class="form-label">Complaint</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name = "complaint">
             </div>
             <div class="container my-2">
                 <button type="button submit" class="btn btn-danger">Submit</button>
