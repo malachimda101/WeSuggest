@@ -10,7 +10,6 @@ class DatabaseStorage():
         self.last_name = "" 
         self.email = "" 
         self.complaint = "" 
-        self.id = ""
         self.num_upvotes= ""
 
     #creates the database, adds info to it, saves it
@@ -19,7 +18,7 @@ class DatabaseStorage():
         conn = sqlite3.connect("WesSuggest_library_info.db")
         c = conn.cursor 
         c.execute("INSERT INTO complaints VALUES (:id, :first, :last, :email, :complaint, :upvotes)", 
-            {'id':self.id,
+            {'id':hash(self.complaint),
              'first':self.first_name, 
              'last':self.last_name,
              'email':self.email,
