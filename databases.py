@@ -1,4 +1,10 @@
-from tkinter import *
 from functools import partial
-import tkinter as tk
 import sqlite3
+
+class DatabaseStorage(): 
+    def __init__(self): 
+        self.first_name = "" 
+        self.last_name = "" 
+        self.email = "" 
+        self.complaint = "" 
+
