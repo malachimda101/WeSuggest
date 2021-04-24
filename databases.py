@@ -14,7 +14,7 @@ class DatabaseStorage():
 
     def submit(self): 
         #connect to the database 
-        conn = sqlite3.connect("WesComplain_library_info.db")
+        conn = sqlite3.connect("WesSuggest_library_info.db")
         c = conn.cursor 
         c.execute("INSERT INTO complaints VALUES (:id, :first, :last, :email, :complaint, :upvotes)", 
             {'id':self.id,
@@ -29,7 +29,7 @@ class DatabaseStorage():
         conn.close() 
 
     def query(self):
-        conn = sqlite3.connect("WesComplain_library_info.db")
+        conn = sqlite3.connect("WesSuggest_library_info.db")
         c = conn.cursor 
         c.execute("SELECT * oid FROM complaints")
         records = c.fetchall 
@@ -45,3 +45,9 @@ class DatabaseStorage():
         
         return query_table
 
+    def delete(self, deletion): 
+        conn = sqlite3.connect("WesSuggest_library_info.db")
+        c = conn.cursor
+        c.execute("DELETE from complaints WHERE self.complaint="+deletion)
+        conn.commit()
+        conn.close 
