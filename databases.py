@@ -2,6 +2,7 @@
 from functools import partial
 import sqlite3
 
+
 #Class for database storage
 class DatabaseStorage(): 
     def __init__(self): 
@@ -9,15 +10,15 @@ class DatabaseStorage():
         self.last_name = "" 
         self.email = "" 
         self.complaint = "" 
-        self.id = ""
         self.num_upvotes= ""
 
+    #creates the database, adds info to it, saves it
     def submit(self): 
         #connect to the database 
         conn = sqlite3.connect("WesSuggest_library_info.db")
         c = conn.cursor 
         c.execute("INSERT INTO complaints VALUES (:id, :first, :last, :email, :complaint, :upvotes)", 
-            {'id':self.id,
+            {'id':hash(self.complaint),
              'first':self.first_name, 
              'last':self.last_name,
              'email':self.email,
@@ -28,11 +29,12 @@ class DatabaseStorage():
         conn.commit() 
         conn.close() 
 
+    #access information from the database using dicts
     def query(self):
         conn = sqlite3.connect("WesSuggest_library_info.db")
         c = conn.cursor 
         c.execute("SELECT * oid FROM complaints")
-        records = c.fetchall 
+        records = c.fetchall()
 
         query_table = {} 
         for record in records:
@@ -45,6 +47,7 @@ class DatabaseStorage():
         
         return query_table
 
+    #delete a specific complaint from the database
     def delete(self, deletion): 
         conn = sqlite3.connect("WesSuggest_library_info.db")
         c = conn.cursor
