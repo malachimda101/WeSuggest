@@ -12,7 +12,14 @@ def index():
 
 @app.route("/complaints")
 def complaints():
+    print(request.args)
     return render_template('complaints.html', complaintid=49, complaint="People in musichouse can't flush the toilet for shit.", upvotes=29)
+
+@app.route("/agree/<complaint>")
+def agree(complaint):
+    print(complaint + "agreed with")
+    return render_template('complaints.html', complaintid=49, complaint="People in musichouse can't flush the toilet for shit.", upvotes=29)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

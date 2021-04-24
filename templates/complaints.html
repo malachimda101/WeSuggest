@@ -14,8 +14,8 @@
                 <h2>{{complaint}}</h2>
             </header>
             {{upvotes}} people agree. Do you?
-            <form >
-                <button type="button submit" class="btn btn-danger" formaction="/complaints?agreed">I Agree.</button>
+            <form>
+                <button type="button submit" class="btn btn-danger" formaction="/agree/{{complaint}}">I Agree.</button>
                 <button type="button submit" class="btn btn-success" formaction="/complaints">Next.</button>
             </form>
         </div>
