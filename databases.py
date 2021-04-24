@@ -75,10 +75,13 @@ class DatabaseStorage():
         conn.close() 
 
 test = DatabaseStorage()
-""" 
-test.creation() 
-^ this code should only be run one time, to create the table in the database
-""" 
+
+#creating the database if it does not already exist
+try: 
+    test.creation() 
+except sqlite3.OperationalError:
+    pass
+ 
 
 #test.submit("jabar","awad","jawad@wesleyan.edu","I hate it here", 1)
 #print(test.query())
@@ -86,3 +89,5 @@ test.creation()
 #print(test.query())
 #test.delete(2196838585774839428)
 #print(test.query())
+
+print(test.query())
