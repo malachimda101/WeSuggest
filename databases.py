@@ -1,4 +1,3 @@
-from tkinter import *
 from functools import partial
 import sqlite3
 
@@ -59,18 +58,31 @@ class DatabaseStorage():
         return query_table
 
     #delete a specific complaint from the database
-    def delete(self, complaint, deletion): 
+    def delete(self, deletion): 
         conn = sqlite3.connect("WesSuggest_library_info.db")
         c = conn.cursor()
-        c.execute("DELETE from complaints WHERE complaint="+deletion)
+        c.execute("DELETE from complaints WHERE id="+str(deletion))
         conn.commit()
-        conn.close 
+        conn.close()
 
-    def add_vote(self, id):
-        map = self.query()
-        map[id] += 1 
+    #accumulation function that adds 1 to the upvote counter
+    def add_vote(self, compar):
+        conn = sqlite3.connect("WesSuggest_library_info.db")
+        c = conn.cursor()
+        c.execute("UPDATE complaints SET upvotes = upvotes + 1 WHERE id =" + str(compar))
+
+        conn.commit()
+        conn.close() 
 
 test = DatabaseStorage()
-#test.creation()
+""" 
+test.creation() 
+^ this code should only be run one time, to create the table in the database
+""" 
+
 #test.submit("jabar","awad","jawad@wesleyan.edu","I hate it here", 1)
-print(test.query())
+#print(test.query())
+#test.add_vote(2196838585774839428)
+#print(test.query())
+#test.delete(2196838585774839428)
+#print(test.query())
