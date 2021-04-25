@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, make_response
 from databases import DatabaseStorage
 app = Flask(__name__)
-
+database = DatabaseStorage()
 
 @app.route("/")
 def index():
@@ -23,10 +23,7 @@ def complaints():
     if(seenComplaints == None):
         seenComplaints = ""
     seenComplaints = seenComplaints.split()
-    database = DatabaseStorage()
     allComplaints = database.query();
-    print(allComplaints)
-    
     complaintId = 0
     complaint = "There are no more suggestions, why not make another one!"
     upvotes = 0
@@ -45,6 +42,7 @@ def complaints():
 @app.route("/agree/<complaintid>")
 def agree(complaintid):
     print(complaintid + "agreed with")
+    database.add_vote(complaintid)
     return redirect(url_for('complaints'))
 
 if __name__ == '__main__':
