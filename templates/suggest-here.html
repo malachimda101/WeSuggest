@@ -38,24 +38,25 @@
         <form action="{{url_for('suggest_here')}}" method="POST">
             <div class="my-3 container">
                 <label for="first-name-input" class="form-label">First Name</label>
-                <input type="name" class="form-control">
+                <input type="name" class="form-control" name="firstname">
             </div>
             <div class="my-3 container">
                 <label for="last-name-input" class="form-label">Last Name</label>
-                <input type="name" class="form-control">
+                <input type="name" class="form-control" name="lastname">
             </div>
             <div class="my-3 container">
                 <label for="email-input" class="form-label">Wes Email</label>
-                <input type="email" class="form-control" id="wesEmail">
+                <input type="email" class="form-control" id="wesEmail" name="email">
             </div>
             <div class="my-3 container">
                 <label for="type-of-suggestion" class="form-label">Type of Suggestion</label>
-                <select class="form-select" aria-label="type-of-suggestion">
+                <select class="form-select" aria-label="type-of-suggestion" name="typeof">
                     <option selected></option>
                     <option value="1">Administrative</option>
                     <option value="2">Housing</option>
                     <option value="3">Social</option>
-                    <option value="4">Other</option>
+                    <option value="4">Teaching</option>
+                    <option value="5">Other</option>
                 </select>
             </div>
             <div class="my-3 container">
