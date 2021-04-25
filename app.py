@@ -27,15 +27,17 @@ def complaints():
     complaintId = 0
     complaint = "No more complaints!"
     upvotes = 0
+    nomorecomplaints = True
 
     for x in allComplaints:
         if(request.cookies.get(str(x)) != 'set'):
+            nomorecomplaints = False
             complaintId = x
             complaint = allComplaints[x][0]
             upvotes = allComplaints[x][1]
             break
 
-    resp = make_response(render_template('complaints.html', complaintid=complaintId, complaint=complaint, upvotes=upvotes))
+    resp = make_response(render_template('complaints.html', complaintid=complaintId, complaint=complaint, upvotes=upvotes, nomorecomplaints=nomorecomplaints))
     resp.set_cookie(str(complaintId), 'set')
     return resp
 
