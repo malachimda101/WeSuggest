@@ -69,7 +69,7 @@ def topcomplaints():
             complaintValueList.append((x[0], 0))
         else:
             complaintValueList.append(x)
-    print(sorted(complaintValueList, key=lambda x:x[1], reverse=True))
+    complaintValueList = sorted(complaintValueList, key=lambda x:x[1], reverse=True)
 
     resp = make_response(render_template('topcomplaints.html', topcomplaints=complaintValueList))
     return resp
