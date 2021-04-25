@@ -118,7 +118,7 @@ except sqlite3.OperationalError:
  
 
 print(test.query())
-#test.submit("jabar","awad","jawad@wesleyan.edu","I wish there was soap in my bathroom!", "Administrative")
+test.submit("jabar","awad","jawad@wesleyan.edu","I wish there was soap in my bathroom!", "Administrative")
 #print(test.query())
 
 #test.add_vote(-276299198530829792)
@@ -135,3 +135,10 @@ print(test.query())
 #print(test.query())
 
 #print(test.highest_upvotes())
+
+"""
+i=0
+while i<4:
+    test.submit("jabar","awad","jawad@wesleyan.edu","wes should have a livery service", "Administrative")
+    i +=1
+"""
