@@ -46,11 +46,33 @@ def complaints():
     resp.set_cookie(str(complaintId), 'set')
     return resp
 
+
 @app.route("/agree/<complaintid>")
 def agree(complaintid):
     print(complaintid + "agreed with")
     database.add_vote(complaintid)
     return redirect(url_for('complaints'))
+
+@app.route("/topcomplaints")
+def topcomplaints():
+    topcomplaints = []
+    allComplaints = database.query();
+    #allComplaints = sorted(allComplaints, )
+    #allComplaints.sort(key=lambda x: x[1], reverse=True)
+    #for w in sorted(allComplaints, key=(lambda x: allComplaints.get(x)[1]), reverse=True):
+    #    print(w, allComplaints[w])
+    complaintValues = allComplaints.values()
+    complaintValueList = []
+    for x in complaintValues:
+        
+        if(x[1] ==''):
+            complaintValueList.append((x[0], 0))
+        else:
+            complaintValueList.append(x)
+    print(sorted(complaintValueList, key=lambda x:x[1], reverse=True))
+
+    resp = make_response(render_template('topcomplaints.html', topcomplaints=complaintValueList))
+    return resp
 
 if __name__ == '__main__':
     app.run(debug=True)
