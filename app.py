@@ -28,7 +28,7 @@ def complaints():
     print(allComplaints)
     
     complaintId = 0
-    complaint = "No more complaints!"
+    complaint = "There are no more suggestions, why not make another one!"
     upvotes = 0
 
     for x in allComplaints:
