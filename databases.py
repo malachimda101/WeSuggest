@@ -16,24 +16,6 @@ class DatabaseStorage():
         conn.commit() 
         conn.close() 
 
-    #access the database, adds info to table, saves it
-    def submit(self, first_name, last_name, email, complaint, typeof): 
-        #connect to the database 
-        conn = sqlite3.connect("WesSuggest_library_info.db")
-        c = conn.cursor()
-        c.execute("INSERT INTO complaints VALUES (:id, :first, :last, :email, :complaint, :typeof, :upvotes)", 
-            {'id':hash(complaint),
-             'first':first_name, 
-             'last':last_name,
-             'email':email,
-             'complaint':complaint,
-             'typeof':typeof,
-             'upvotes':0
-            }    
-        )
-        conn.commit() 
-        conn.close() 
-
     #access information from the database using dicts
     def query(self):
         conn = sqlite3.connect("WesSuggest_library_info.db")
@@ -51,6 +33,36 @@ class DatabaseStorage():
         conn.close()
         
         return query_table
+
+    #access the database, adds info to table, saves it
+    def submit(self, first_name, last_name, email, complaint, typeof): 
+        #connect to the database 
+        conn = sqlite3.connect("WesSuggest_library_info.db")
+        c = conn.cursor()
+
+        query_table = self.query()
+        for key in query_table:
+            a_tuple = query_table[key]
+            if a_tuple[0] == complaint:
+
+                self.add_vote(key)
+
+                conn.commit()
+                conn.close() 
+                return 
+            
+        c.execute("INSERT INTO complaints VALUES (:id, :first, :last, :email, :complaint, :typeof, :upvotes)", 
+            {'id':hash(complaint),
+            'first':first_name, 
+            'last':last_name,
+            'email':email,
+            'complaint':complaint,
+            'typeof':typeof,
+            'upvotes':0
+            }    
+        )
+        conn.commit() 
+        conn.close() 
         
     #delete a specific complaint from the database
     def delete(self, deletion_list): 
@@ -79,6 +91,7 @@ class DatabaseStorage():
         conn.commit()
         conn.close()
 
+
 test = DatabaseStorage()
 
 #creating the database if it does not already exist
@@ -88,16 +101,19 @@ except sqlite3.OperationalError:
     pass
  
 
-print(test.query())
+#print(test.query())
 #test.submit("jabar","awad","jawad@wesleyan.edu","I hate it here", "Administrative")
 #print(test.query())
 
-#test.add_vote(2196838585774839428)
+#test.add_vote(-276299198530829792)
 #print(test.query())
 
 #test.delete(2196838585774839428)
 #print(test.query())
 
 #print(test.query())
-#test.delete_all()
-print(test.query())
+test.delete_all()
+
+#test.submit("jabar","awad","jawad@wesleyan.edu","I hate it here", "Administrative")
+
+#print(test.query())
