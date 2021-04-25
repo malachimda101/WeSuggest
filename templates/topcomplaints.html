@@ -23,23 +23,25 @@
                     <a class="nav-link" href="suggest-here">Make a Suggestion</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link active text-danger" href="complaints">Vote on Suggestions</a>
+                    <a class="nav-link" href="complaints">Vote on Suggestions</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active text-danger" href="topcomplaints">Top Complaints</a>
                   </li>
                 </ul>
               </div>
             </div>
           </nav>
-
-          <div class="container my-5 text-center">
+          <div class="container my-5">
             <header class="justify-content-center">
                 <h2>Top Complaints:</h2>
             </header>
-          <ol id="topcomplaints">
-            {% for item in topcomplaints %}
-              <li>{{item[0]}} got {{ item[1] }} upvotes.</li>
-            {% endfor %}
-          </ol>
-        </div>
+            <ol id="topcomplaints">
+              {% for item in topcomplaints %}
+                <li>{{item[0]}} got {{ item[1] }} upvotes.</li>
+              {% endfor %}
+            </ol>
+          </div>
 
 
 
