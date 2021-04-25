@@ -25,7 +25,7 @@ def complaints():
     seenComplaints = seenComplaints.split()
     allComplaints = database.query();
     complaintId = 0
-    complaint = "No more complaints!"
+    complaint = "There are no more suggestions, why not make another one!"
     upvotes = 0
     nomorecomplaints = True
 

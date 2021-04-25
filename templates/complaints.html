@@ -38,14 +38,16 @@
         {%else%}
         <div class="container my-5">
             <header class="justify-content-center">
-                <h1 class="">Someone complained:</h1>
-                <h2>{{complaint}}</h2>
+                <h1>Someone Said:</h1>
+                <h2 class="lead fs-2">{{complaint}}</h2>
             </header>
-            {{upvotes}} people agree. Do you?
-            <form>
-                <button type="button submit" class="btn btn-danger" formaction="/agree/{{complaintid}}">I Agree.</button>
-                <button type="button submit" class="btn btn-success" formaction="/complaints">Next.</button>
-            </form>
+            {{upvotes}} people agree. <em>Do you?</em>
+            <div class="container my-3">
+                <form>
+                    <button type="button submit" class="btn btn-danger mx-2" formaction="/agree/{{complaintid}}">I Agree.</button>
+                    <button type="button submit" class="btn btn-outline-danger mx-2" formaction="/complaints">Next.</button>
+                </form>
+            </div>
         </div>
         {% endif %}
 
