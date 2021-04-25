@@ -11,14 +11,7 @@ class DatabaseStorage():
     def creation(self): 
         conn = sqlite3.connect("WesSuggest_library_info.db")
         c = conn.cursor() 
-        c.execute("""CREATE TABLE complaints (
-                id integer, 
-                first text, 
-                last text,
-                email text,
-                complaint text,
-                upvotes integer,
-                typeof)""")
+        c.execute("CREATE TABLE complaints (id integer, first text, last text, email text, complaint text, typeof text, upvotes integer)")
 
         conn.commit() 
         conn.close() 
@@ -47,7 +40,7 @@ class DatabaseStorage():
         c = conn.cursor()
         c.execute("SELECT id, complaint, upvotes FROM complaints")
         records = c.fetchall()
-
+        
         query_table = {} 
         for record in records:
             key = record[0]
@@ -58,12 +51,15 @@ class DatabaseStorage():
         conn.close()
         
         return query_table
-
+        
     #delete a specific complaint from the database
-    def delete(self, deletion): 
+    def delete(self, deletion_list): 
         conn = sqlite3.connect("WesSuggest_library_info.db")
         c = conn.cursor()
-        c.execute("DELETE from complaints WHERE id="+str(deletion))
+
+        for deletion in deletion_list:
+            c.execute("DELETE from complaints WHERE id="+str(deletion))
+
         conn.commit()
         conn.close()
 
@@ -76,6 +72,13 @@ class DatabaseStorage():
         conn.commit()
         conn.close() 
 
+    def delete_all(self):
+        conn = sqlite3.connect("WesSuggest_library_info.db")
+        c = conn.cursor()
+        c.execute("DELETE from complaints")
+        conn.commit()
+        conn.close()
+
 test = DatabaseStorage()
 
 #creating the database if it does not already exist
@@ -85,11 +88,16 @@ except sqlite3.OperationalError:
     pass
  
 
-#test.submit("jabar","awad","jawad@wesleyan.edu","I hate it here", 1)
+print(test.query())
+#test.submit("jabar","awad","jawad@wesleyan.edu","I hate it here", "Administrative")
 #print(test.query())
+
 #test.add_vote(2196838585774839428)
 #print(test.query())
+
 #test.delete(2196838585774839428)
 #print(test.query())
 
+#print(test.query())
+#test.delete_all()
 print(test.query())
