@@ -84,12 +84,28 @@ class DatabaseStorage():
         conn.commit()
         conn.close() 
 
+    #function to delete entire table
     def delete_all(self):
         conn = sqlite3.connect("WesSuggest_library_info.db")
         c = conn.cursor()
         c.execute("DELETE from complaints")
         conn.commit()
         conn.close()
+
+    #function to return the complaint with the most upvotes, returns a list of multiple complaints if they are equal in count
+    def highest_upvotes(self):
+        import math 
+        highest_count = -math.inf 
+        highest = []
+        query_table = self.query()
+
+        for id in query_table: 
+            a_tuple = query_table[id]
+            if a_tuple[1] >= highest_count: 
+                highest_count = a_tuple[1]
+                highest.append(a_tuple[0])
+
+        return highest 
 
 
 test = DatabaseStorage()
@@ -101,8 +117,8 @@ except sqlite3.OperationalError:
     pass
  
 
-#print(test.query())
-#test.submit("jabar","awad","jawad@wesleyan.edu","I hate it here", "Administrative")
+print(test.query())
+#test.submit("jabar","awad","jawad@wesleyan.edu","I wish there was soap in my bathroom!", "Administrative")
 #print(test.query())
 
 #test.add_vote(-276299198530829792)
@@ -112,8 +128,10 @@ except sqlite3.OperationalError:
 #print(test.query())
 
 #print(test.query())
-test.delete_all()
+#test.delete_all()
 
 #test.submit("jabar","awad","jawad@wesleyan.edu","I hate it here", "Administrative")
 
 #print(test.query())
+
+print(test.highest_upvotes())
