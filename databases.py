@@ -34,7 +34,7 @@ class DatabaseStorage():
              'last':last_name,
              'email':email,
              'complaint':complaint,
-             'type':typeof,
+             'typeof':typeof,
              'upvotes':0
             }    
         )

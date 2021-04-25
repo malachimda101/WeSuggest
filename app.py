@@ -13,7 +13,12 @@ def suggest_here():
         return render_template('suggest-here.html', my_string="Wheeeee!", my_list=[0,1,2,3,4,5])
     if request.method == 'POST':
         database = DatabaseStorage()
-        database.submit("homie", "mchomieface", "homie@wesleyan.edu", request.form['complaint'])
+        firstname = request.form['firstname']
+        lastname = request.form['lastname']
+        email = request.form['email']
+        typeof = request.form['typeof']
+        complaint = request.form['complaint']
+        database.submit(firstname, lastname, email, complaint, typeof)
 
         return redirect(url_for('complaints'))
 
